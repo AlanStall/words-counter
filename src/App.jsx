@@ -3,7 +3,7 @@ import './app.css'
 
 export function App() {  
   const [ text, setText ] = useState("");
-  const [ repeatedWords, setRepeatedWords ] = useState("");
+  const [ repeatedWords, setRepeatedWords ] = useState([]);
 
   function wordsCounter() {
     const array = text
@@ -30,11 +30,9 @@ export function App() {
 
     var sortedWords = Object
       .entries(count)
-      .sort(function(a,b) { return [ b[1] - a[1] ] })
-      .join('\n')      
-      .replace(/([,])/g, "=>");
+      .sort(function(a,b) { return [ b[1] - a[1] ] })    
     
-    console.log(sortedWords);
+    console.log(sortedWords)
     setRepeatedWords(sortedWords);
   } 
 
@@ -54,7 +52,7 @@ export function App() {
   
   return (
     <>
-      <h2 className="title">Word Frequency Counter</h2>
+      <h1 className="title">Word Frequency Counter</h1>
       <textarea 
         id="input-area" 
         className="input-area"
@@ -62,9 +60,14 @@ export function App() {
       >        
       </textarea>
       <button id="button" className="button" onClick={wordsCounter}>Count Each Word and Sort</button>
-      <h3 className="word-length">Words: {resultRender}</h3>
-      <br></br>
-      <h3 className="repeated-length">Sorted Words: <br></br> {repeatedWords}</h3>
-    </>
+      <h3 className="words">Words: {resultRender}</h3>
+      <br></br>      
+      <h3>Repeated Words:</h3>
+      <div className="repeated-length">        
+        {repeatedWords.map(rw => {
+          return (<h4 key={rw}> 👉🏻 {rw[0]} [ {rw[1]} ]</h4>);
+        })}
+      </div>  
+    </>  
   )
 }
