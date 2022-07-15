@@ -1,1 +1,1 @@
-words-counter 
+words-counter - app tested.
